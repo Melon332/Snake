@@ -22,10 +22,11 @@ public class SnakeManager : MonoBehaviour
     PlayerMovement playerMovement;
     TimeAndPoints pointManager;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {        
         Instantiate(snakeHead);
         playerMovement = GameObject.Find("SnakeHead").GetComponent<PlayerMovement>();
+        snakeBodies = GameObject.FindGameObjectsWithTag("Player");
         AddBodiesToArray();
         Time.timeScale = 0.25f;
 
@@ -55,9 +56,9 @@ public class SnakeManager : MonoBehaviour
     
     public void AddBodiesToArray()
     {
-        snakeBodies = GameObject.FindGameObjectsWithTag("Player");
         var childSpawnPosition = snakeBodies[snakeBodies.Length - 1].transform;        
         Instantiate(snakeBody, childSpawnPosition.transform.position, Quaternion.identity);
+        snakeBodies = GameObject.FindGameObjectsWithTag("Player");
     }
 
     private void FollowTheLeaderSnake()
