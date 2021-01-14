@@ -75,9 +75,9 @@ public class SnakeManager : MonoBehaviour
 
             float T = Time.deltaTime * dis / minDistance * 5;
 
-            if (T > 0.1f)
+            if (T > 0.01f)
             {
-                T = 0.1f;
+                T = 0.01f;
                 curBodyPart.position = Vector3.Slerp(curBodyPart.position, newPos, T);
                 curBodyPart.rotation = Quaternion.Slerp(curBodyPart.rotation, prevBodyPart.rotation, T);
             }
