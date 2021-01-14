@@ -7,15 +7,10 @@ public class PlayerInputs : MonoBehaviour
 {
     public event EventHandler<bool> moveLeft;
     public event EventHandler<bool> moveRight;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
+        //Sends events to the PlayerMovement to trigger movement.
         InputLeft();
         InputRight();
     }

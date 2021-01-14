@@ -5,19 +5,22 @@ using UnityEngine;
 public class FruitManager : MonoBehaviour
 {
     int randomFruitNumber;
-    int TimeForFruitSpawn = 3;
+
+    [SerializeField] float TimeForFruitSpawn = 3;
 
     float maxX, minX;
     float maxZ, minZ;
     [SerializeField] List<GameObject> Fruits = new List<GameObject>();
 
-    // Start is called before the first frame update
-    void Start()
+    public FruitManager()
     {
         minX = -17.6f;
         maxX = 14.5f;
         minZ = -12.8f;
         maxZ = 12.7f;
+    }
+    void Start()
+    {
         InvokeRepeating("InstatiateFruit", TimeForFruitSpawn, TimeForFruitSpawn);
     }
 

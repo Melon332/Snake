@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnakeAI : PlayerMovement
+public class SnakeAI : MonoBehaviour
 {
-    // Start is called before the first frame update
+    SnakeManager manager;
     void Start()
     {
-        
+        manager = GameObject.Find("SnakeManager").GetComponent<SnakeManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        AlwaysMoveForward();
-    }     
+        if (other.gameObject.tag == "SnakeNose")
+        {
+            manager.GameOver();
+        }
+    }
 }

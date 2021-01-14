@@ -646,6 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5620e9c8879caec42ae392e09fe3303b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimeForFruitSpawn: 3
   Fruits:
   - {fileID: 972184321320526869, guid: 38dca4789709d4b45871c14baba49b69, type: 3}
   - {fileID: 2033317935714652244, guid: 1d1d45d2c0c8fb447868a10470c91389, type: 3}
@@ -1126,6 +1127,7 @@ MonoBehaviour:
     type: 3}
   snakeBody: {fileID: 1210596394704740215, guid: a90aa82834504be44b1167dab3e1125d,
     type: 3}
+  minDistance: 0.25
 --- !u!4 &741885524
 Transform:
   m_ObjectHideFlags: 0

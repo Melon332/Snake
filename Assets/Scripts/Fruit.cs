@@ -27,8 +27,10 @@ public class Fruit : MonoBehaviour
             gameObject.GetComponent<Collider>().enabled = false;
             manager.AddBodiesToArray();
             timeAndPoints.pointsGathered++;
+            //Destroys the fruit in the background.
+            //So that the sound and VFX can play.
+            //Before the objects is destroyed.
             StartCoroutine(DestroyFruit());
-            //TODO: Add a sound effect for when the player eats the fruit.
         }
     }
     private IEnumerator DestroyFruit()

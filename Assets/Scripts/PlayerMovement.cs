@@ -5,14 +5,12 @@ using System;
 
 public class PlayerMovement : MonoBehaviour
 {
-    float moveSpeed = 5;
+    [SerializeField] float moveSpeed = 5;
 
     private readonly Vector3 lookLeft;
     private readonly Vector3 lookRight;
 
     PlayerInputs inputs;
-
-    public event EventHandler<(Vector3,Vector3)> haveTurned;
 
     public PlayerMovement()
     {
@@ -23,8 +21,10 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //References the input system.
         inputs = GetComponent<PlayerInputs>();
 
+        //Subscribes to the events.
         inputs.moveLeft += Inputs_moveLeft;
         inputs.moveRight += Inputs_moveRight;
     }
@@ -47,17 +47,16 @@ public class PlayerMovement : MonoBehaviour
 
     public void AlwaysMoveForward()
     {
+        //Makes sure the object always moves forward in world space.
         transform.localPosition = transform.localPosition + transform.forward * moveSpeed * Time.deltaTime;
     }
     
     private void MoveLeft()
     {
-        haveTurned?.Invoke(this, (transform.position,lookLeft));
         transform.Rotate(lookLeft);              
     }
     private void MoveRight()
     {
-        haveTurned?.Invoke(this, (transform.position,lookRight));
         transform.Rotate(lookRight);
     }
 }
