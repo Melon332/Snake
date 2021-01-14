@@ -11,9 +11,17 @@ public class SnakeManager : MonoBehaviour
 
      GameObject gameOverPanel;
 
+    private Transform curBodyPart;
+    private Transform prevBodyPart;
+
+    private float dis;
+
+    public float minDistance = 0.25f;
+
     Vector3 parentPosition;
-    Vector3 lastPosition;
-    Vector3 rotate;
+    Vector3 childPosition;
+
+    public float duration = 5.0f;
 
     Transform spawnPosition;
 
@@ -28,22 +36,12 @@ public class SnakeManager : MonoBehaviour
         playerMovement = GameObject.Find("SnakeHead").GetComponent<PlayerMovement>();
         snakeBodies = GameObject.FindGameObjectsWithTag("Player");
         AddBodiesToArray();
-        Time.timeScale = 0.25f;
 
 
         gameOverPanel = GameObject.Find("GameOverPanel");
         gameOverPanel.SetActive(false);
 
         pointManager = GameObject.Find("UI").GetComponent<TimeAndPoints>();
-
-        playerMovement.haveTurned += PlayerMovement_haveTurned;
-    }
-
-    private void PlayerMovement_haveTurned(object sender, (Vector3, Vector3) e)
-    {
-        lastPosition = e.Item1;
-        rotate = e.Item2;
-        lastPositionChanged = true;
     }
 
 
@@ -56,51 +54,42 @@ public class SnakeManager : MonoBehaviour
     
     public void AddBodiesToArray()
     {
-        var childSpawnPosition = snakeBodies[snakeBodies.Length - 1].transform;        
+        var childSpawnPosition = snakeBodies[snakeBodies.Length - 1].transform;
+        parentPosition = snakeBodies[0].transform.position;
         Instantiate(snakeBody, childSpawnPosition.transform.position, Quaternion.identity);
         snakeBodies = GameObject.FindGameObjectsWithTag("Player");
     }
 
     private void FollowTheLeaderSnake()
     {
-
-        parentPosition = snakeBodies[0].transform.position;
-
         for (int i = 1; i < snakeBodies.Length; i++)
         {
-            if(lastPositionChanged && snakeBodies[i].transform.position == lastPosition)
+            curBodyPart = snakeBodies[i].transform;
+            prevBodyPart = snakeBodies[i - 1].transform;
+
+            dis = Vector3.Distance(prevBodyPart.position, curBodyPart.position);
+
+            Vector3 newPos = prevBodyPart.position;
+
+            newPos.y = snakeBodies[0].transform.position.y;
+
+            float T = Time.deltaTime * dis / minDistance * 5;
+
+            if (T > 0.1f)
             {
-                Rotate(snakeBodies[i], snakeBodies[i-1]);
-                lastPositionChanged = false;
+                T = 0.1f;
+                curBodyPart.position = Vector3.Slerp(curBodyPart.position, newPos, T);
+                curBodyPart.rotation = Quaternion.Slerp(curBodyPart.rotation, prevBodyPart.rotation, T);
             }
-            else if (lastPositionChanged)
-            {
-                FollowLastPosition(snakeBodies[i],snakeBodies[i-1]);
-            }
-            else
-            {
-                FollowTheParent(snakeBodies[i], snakeBodies[i - 1]);
-            }
+
         }
-        
+
+
+
+
     }
 
-    private void FollowTheParent(GameObject child,GameObject parent)
-    {
-        child.transform.position = parent.transform.GetChild(0).position;
-        Debug.Log("following the parent!");
-    }
-    private void FollowLastPosition(GameObject child, GameObject parent)
-    {
-        child.transform.position = new Vector3(lastPosition.x, lastPosition.y, lastPosition.z);
-        Debug.Log("following last position!");
-    }
-    private void Rotate(GameObject child, GameObject parent)
-    {
-        child.transform.position = parent.transform.GetChild(0).position;
-        child.transform.Rotate(rotate);
-        Debug.Log("rotating!");
-    }
+
     public void GameOver()
     {
         Time.timeScale = 0;
