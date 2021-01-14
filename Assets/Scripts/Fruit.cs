@@ -5,14 +5,14 @@ using UnityEngine;
 public class Fruit : MonoBehaviour
 {
     TimeAndPoints timeAndPoints;
-    ParticleSystem particleSystem = new ParticleSystem();
+    ParticleSystem fruitParticles;
     SnakeManager manager;
     AudioSource fruitSound;
     // Start is called before the first frame update
     void Start()
     {
         timeAndPoints = GameObject.Find("UI").GetComponent<TimeAndPoints>();
-        particleSystem = GetComponentInChildren<ParticleSystem>();
+        fruitParticles = GetComponentInChildren<ParticleSystem>();
         manager = GameObject.Find("SnakeManager").GetComponent<SnakeManager>();
         fruitSound = GetComponentInChildren<AudioSource>();
     }
@@ -21,10 +21,12 @@ public class Fruit : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            particleSystem.Play();
+            fruitParticles.Play();
             fruitSound.Play();
+
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<Collider>().enabled = false;
+
             manager.AddBodiesToArray();
             timeAndPoints.pointsGathered++;
             //Destroys the fruit in the background.

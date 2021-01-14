@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
         lookLeft = new Vector3(0, -90, 0);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         //References the input system.
@@ -39,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
         MoveLeft();
     }
 
-    // Update is called once per frame
     void Update()
     {
         AlwaysMoveForward();
@@ -55,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.Rotate(lookLeft);              
     }
+
     private void MoveRight()
     {
         transform.Rotate(lookRight);

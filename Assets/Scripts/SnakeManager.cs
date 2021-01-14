@@ -19,10 +19,6 @@ public class SnakeManager : MonoBehaviour
     //Sets the distance between the different parts.
     public float minDistance = 0.25f;
 
-    Transform spawnPosition;
-
-    bool lastPositionChanged;
-
     TimeAndPoints pointManager;
     void Awake()
     {        
@@ -34,6 +30,7 @@ public class SnakeManager : MonoBehaviour
         //Intalizing UI elements.
         gameOverPanel = GameObject.Find("GameOverPanel");
         gameOverPanel.SetActive(false);
+
         pointManager = GameObject.Find("UI").GetComponent<TimeAndPoints>();
     }
 
