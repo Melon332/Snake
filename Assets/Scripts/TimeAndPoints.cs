@@ -18,13 +18,13 @@ public class TimeAndPoints : MonoBehaviour
         timeText = GameObject.Find("PointsText").GetComponent<Text>();
         highScoreText = GameObject.Find("HighScoreText").GetComponent<Text>();
         highScore = PlayerPrefs.GetInt("HighScore");
+        AmountOfPointsHad();
     }
 
     // Update is called once per frame
     void Update()
     {
         TimerRunning();
-        AmountOfPointsHad();
     }
 
     private void TimerRunning()
@@ -32,7 +32,7 @@ public class TimeAndPoints : MonoBehaviour
         timeText.text = "Timer: " + Time.timeSinceLevelLoad.ToString("0.0");
     }
     
-    private void AmountOfPointsHad()
+    public void AmountOfPointsHad()
     {
         pointText.text = "Points: " + pointsGathered.ToString();
         highScoreText.text = "High Score: " + highScore.ToString();

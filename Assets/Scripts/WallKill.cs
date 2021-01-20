@@ -13,7 +13,7 @@ public class WallKill : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
             manager.GameOver();
     }
 }

@@ -8,6 +8,7 @@ public class Fruit : MonoBehaviour
     ParticleSystem fruitParticles;
     SnakeManager manager;
     AudioSource fruitSound;
+    TimeAndPoints pointUpdater;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,8 @@ public class Fruit : MonoBehaviour
         fruitParticles = GetComponentInChildren<ParticleSystem>();
         manager = GameObject.Find("SnakeManager").GetComponent<SnakeManager>();
         fruitSound = GetComponentInChildren<AudioSource>();
+        pointUpdater = GameObject.Find("UI").GetComponent<TimeAndPoints>();
+        pointUpdater.AmountOfPointsHad();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -33,6 +36,7 @@ public class Fruit : MonoBehaviour
             //So that the sound and VFX can play.
             //Before the objects is destroyed.
             StartCoroutine(DestroyFruit());
+            pointUpdater.AmountOfPointsHad();
         }
     }
     private IEnumerator DestroyFruit()
