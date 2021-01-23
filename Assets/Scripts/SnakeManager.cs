@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Profiling;
 
 public class SnakeManager : MonoBehaviour
 {
@@ -60,8 +61,12 @@ public class SnakeManager : MonoBehaviour
             curBodyPart = snakeBodies[i].transform;
             prevBodyPart = snakeBodies[i - 1].transform;
 
+            Profiler.BeginSample("DISTANCE");
+
             //Calculates the distance between them.
-            dis = Vector3.Distance(prevBodyPart.position, curBodyPart.position);
+            dis = Vector3.SqrMagnitude(prevBodyPart.position - curBodyPart.position);
+
+            Profiler.EndSample();
 
             Vector3 newPos = prevBodyPart.position;
 

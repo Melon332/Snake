@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallKill : MonoBehaviour
+public class WallKill : MonoBehaviour, IInteractable
 {
     SnakeManager manager;
     // Start is called before the first frame update
@@ -14,6 +14,11 @@ public class WallKill : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
-            manager.GameOver();
+            Interacted();
+    }
+
+    public void Interacted()
+    {
+        manager.GameOver();
     }
 }

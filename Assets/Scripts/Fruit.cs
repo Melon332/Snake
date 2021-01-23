@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fruit : MonoBehaviour
+public class Fruit : MonoBehaviour, IInteractable
 {
     TimeAndPoints timeAndPoints;
     ParticleSystem fruitParticles;
@@ -24,24 +24,29 @@ public class Fruit : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            fruitParticles.Play();
-            fruitSound.Play();
-
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            gameObject.GetComponent<Collider>().enabled = false;
-
-            manager.AddBodiesToArray();
-            timeAndPoints.pointsGathered++;
-            //Destroys the fruit in the background.
-            //So that the sound and VFX can play.
-            //Before the objects is destroyed.
-            StartCoroutine(DestroyFruit());
-            pointUpdater.AmountOfPointsHad();
+            Interacted();
         }
     }
     private IEnumerator DestroyFruit()
     {
         yield return new WaitForSeconds(2);
         Destroy(gameObject);
+    }
+
+    public void Interacted()
+    {
+        fruitParticles.Play();
+        fruitSound.Play();
+
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<Collider>().enabled = false;
+
+        manager.AddBodiesToArray();
+        timeAndPoints.pointsGathered++;
+        //Destroys the fruit in the background.
+        //So that the sound and VFX can play.
+        //Before the objects is destroyed.
+        StartCoroutine(DestroyFruit());
+        pointUpdater.AmountOfPointsHad();
     }
 }
