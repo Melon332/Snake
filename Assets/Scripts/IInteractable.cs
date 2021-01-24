@@ -1,4 +1,4 @@
 ﻿interface IInteractable
 {
-    void Interacted();
+    void EatenFruit();
 }

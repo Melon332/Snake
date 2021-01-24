@@ -14,10 +14,10 @@ public class WallKill : MonoBehaviour, IInteractable
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
-            Interacted();
+            EatenFruit();
     }
 
-    public void Interacted()
+    public void EatenFruit()
     {
         manager.GameOver();
     }

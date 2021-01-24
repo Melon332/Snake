@@ -1,14 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Profiling;
 
+
 public class SnakeManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] snakeBodies;
+    [SerializeField] private static GameObject[] snakeBodies;
     [SerializeField] GameObject snakeHead, snakeBody;
+
+    private static int currentSnakeLength = 1;
 
     GameObject gameOverPanel;
 
@@ -22,12 +26,14 @@ public class SnakeManager : MonoBehaviour
 
     TimeAndPoints pointManager;
     void Awake()
-    {        
+    {
+        snakeBodies = new GameObject[8];
+        currentSnakeLength = 1;
         Instantiate(snakeHead);
         //Adds an element to the array so it doesn't become null.
         snakeBodies = GameObject.FindGameObjectsWithTag("Player");
         AddBodiesToArray();
-        
+
         //Intalizing UI elements.
         gameOverPanel = GameObject.Find("GameOverPanel");
         gameOverPanel.SetActive(false);
@@ -47,15 +53,18 @@ public class SnakeManager : MonoBehaviour
     {
         //Spawns the snake body parts behind each other, snake 1 spawns behind
         //Snake 0, etc, etc.
-        var childSpawnPosition = snakeBodies[snakeBodies.Length - 1].transform;
-        Instantiate(snakeBody, childSpawnPosition.transform.position, Quaternion.identity);
+        var childSpawnPosition = snakeBodies[currentSnakeLength - 1].transform;
+        GameObject newBody = Instantiate(snakeBody, childSpawnPosition.transform.position, Quaternion.identity);
         //Adds them to an array called snakeBodies.
-        snakeBodies = GameObject.FindGameObjectsWithTag("Player");
+
+        if (snakeBodies.Length == currentSnakeLength)
+            Array.Resize(ref snakeBodies, snakeBodies.Length * 2);
+        snakeBodies[currentSnakeLength++] = newBody;
     }
 
     private void FollowTheLeaderSnake()
     {
-        for (int i = 1; i < snakeBodies.Length; i++)
+        for (int i = 1; i < currentSnakeLength; i++)
         {
             //Saves the leader snake position and it's children.
             curBodyPart = snakeBodies[i].transform;

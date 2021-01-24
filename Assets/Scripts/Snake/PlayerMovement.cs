@@ -5,7 +5,7 @@ using System;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 5;
+    public float moveSpeed = 5;
 
     private readonly Vector3 lookLeft;
     private readonly Vector3 lookRight;

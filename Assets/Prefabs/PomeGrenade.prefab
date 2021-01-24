@@ -4768,6 +4768,7 @@ GameObject:
   - component: {fileID: 4646670250708216426}
   - component: {fileID: 8959942045089519108}
   - component: {fileID: -7412910149113970836}
+  - component: {fileID: -6333377767984962324}
   m_Layer: 0
   m_Name: PomeGrenade
   m_TagString: Untagged
@@ -4863,6 +4864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a901ba69e3124a47bf177b7af80eb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 0}
 --- !u!54 &-7412910149113970836
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4879,6 +4881,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6333377767984962324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033317935714652244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49433855db718564181c83c05b5c9e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 0}
+  moveSpeed: 1
 --- !u!1 &6864123877638858282
 GameObject:
   m_ObjectHideFlags: 0

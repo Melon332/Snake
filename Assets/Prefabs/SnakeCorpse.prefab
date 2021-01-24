@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 717f1aeef2bc77544a95813483c3148a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 5
 --- !u!114 &5855926570180527612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,7 +272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5855926571468433505}
   m_Layer: 0
-  m_Name: SnakeHead
+  m_Name: SnakeCorpse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

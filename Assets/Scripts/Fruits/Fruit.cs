@@ -9,9 +9,14 @@ public class Fruit : MonoBehaviour, IInteractable
     SnakeManager manager;
     AudioSource fruitSound;
     TimeAndPoints pointUpdater;
+    public PlayerMovement playerMovement;
+
+    float moveSpeedCap = 15f;
+
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
+        playerMovement = GameObject.Find("SnakeHead").GetComponentInChildren<PlayerMovement>();
         timeAndPoints = GameObject.Find("UI").GetComponent<TimeAndPoints>();
         fruitParticles = GetComponentInChildren<ParticleSystem>();
         manager = GameObject.Find("SnakeManager").GetComponent<SnakeManager>();
@@ -24,7 +29,7 @@ public class Fruit : MonoBehaviour, IInteractable
     {
         if(other.gameObject.tag == "Player")
         {
-            Interacted();
+            EatenFruit();
         }
     }
     private IEnumerator DestroyFruit()
@@ -33,7 +38,7 @@ public class Fruit : MonoBehaviour, IInteractable
         Destroy(gameObject);
     }
 
-    public void Interacted()
+    public virtual void EatenFruit()
     {
         fruitParticles.Play();
         fruitSound.Play();
@@ -48,5 +53,9 @@ public class Fruit : MonoBehaviour, IInteractable
         //Before the objects is destroyed.
         StartCoroutine(DestroyFruit());
         pointUpdater.AmountOfPointsHad();
-    }
+        if(playerMovement.moveSpeed >= moveSpeedCap)
+        {
+            playerMovement.moveSpeed = moveSpeedCap;
+        }
+    } 
 }
