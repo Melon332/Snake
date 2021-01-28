@@ -10,7 +10,8 @@ public class FruitManager : MonoBehaviour
 
     float maxX, minX;
     float maxZ, minZ;
-    [SerializeField] List<GameObject> Fruits = new List<GameObject>();
+
+    FruitPool fruitPool;
 
     public FruitManager()
     {
@@ -22,6 +23,8 @@ public class FruitManager : MonoBehaviour
     void Start()
     {
         InvokeRepeating("InstatiateFruit", TimeForFruitSpawn, TimeForFruitSpawn);
+
+        fruitPool = GetComponent<FruitPool>();
     }
 
     private void InstatiateFruit()
@@ -30,6 +33,11 @@ public class FruitManager : MonoBehaviour
         float randomZ = Random.Range(maxZ, minZ);
         randomFruitNumber = Random.Range(0, 3);
 
-        Instantiate(Fruits[randomFruitNumber], new Vector3(randomX, 1, randomZ), Quaternion.identity);        
+        GameObject fruit = fruitPool.GetGameObject();
+
+        fruit.transform.position = new Vector3(randomX, 1, randomZ);
+
+        fruit.SetActive(true);
+        
     }
 }

@@ -32,10 +32,9 @@ public class Fruit : MonoBehaviour, IInteractable
             EatenFruit();
         }
     }
-    private IEnumerator DestroyFruit()
+    private void DestroyFruit()
     {
-        yield return new WaitForSeconds(2);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public virtual void EatenFruit()
@@ -51,7 +50,7 @@ public class Fruit : MonoBehaviour, IInteractable
         //Destroys the fruit in the background.
         //So that the sound and VFX can play.
         //Before the objects is destroyed.
-        StartCoroutine(DestroyFruit());
+        DestroyFruit();
         pointUpdater.AmountOfPointsHad();
         if(playerMovement.moveSpeed >= moveSpeedCap)
         {
