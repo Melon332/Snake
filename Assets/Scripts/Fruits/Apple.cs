@@ -6,9 +6,9 @@ public class Apple : Fruit
 {
     [SerializeField] float moveSpeed = 5;
     // Start is called before the first frame update
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
     }
 
     public override void EatenFruit()

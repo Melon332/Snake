@@ -22,7 +22,7 @@ public class FruitManager : MonoBehaviour
     }
     void Start()
     {
-        InvokeRepeating("InstatiateFruit", TimeForFruitSpawn, TimeForFruitSpawn);
+        InvokeRepeating("InstatiateFruit", 1, TimeForFruitSpawn);
 
         fruitPool = GetComponent<FruitPool>();
     }
@@ -31,13 +31,12 @@ public class FruitManager : MonoBehaviour
     {            
         float randomX = Random.Range(maxX, minX);
         float randomZ = Random.Range(maxZ, minZ);
-        randomFruitNumber = Random.Range(0, 3);
 
         GameObject fruit = fruitPool.GetGameObject();
 
-        fruit.transform.position = new Vector3(randomX, 1, randomZ);
-
         fruit.SetActive(true);
+
+        fruit.transform.position = new Vector3(randomX, 1, randomZ);
         
     }
 }

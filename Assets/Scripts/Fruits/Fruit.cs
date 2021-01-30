@@ -14,15 +14,9 @@ public class Fruit : MonoBehaviour, IInteractable
     float moveSpeedCap = 15f;
 
     // Start is called before the first frame update
-    public virtual void Start()
+    public virtual void Awake()
     {
-        playerMovement = GameObject.Find("SnakeHead").GetComponentInChildren<PlayerMovement>();
-        timeAndPoints = GameObject.Find("UI").GetComponent<TimeAndPoints>();
-        fruitParticles = GetComponentInChildren<ParticleSystem>();
-        manager = GameObject.Find("SnakeManager").GetComponent<SnakeManager>();
-        fruitSound = GetComponentInChildren<AudioSource>();
-        pointUpdater = GameObject.Find("UI").GetComponent<TimeAndPoints>();
-        pointUpdater.AmountOfPointsHad();
+        Invoke("CacheReferences", 0.5f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,9 +36,6 @@ public class Fruit : MonoBehaviour, IInteractable
         fruitParticles.Play();
         fruitSound.Play();
 
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<Collider>().enabled = false;
-
         manager.AddBodiesToArray();
         timeAndPoints.pointsGathered++;
         //Destroys the fruit in the background.
@@ -57,4 +48,16 @@ public class Fruit : MonoBehaviour, IInteractable
             playerMovement.moveSpeed = moveSpeedCap;
         }
     } 
+
+    private void CacheReferences()
+    {
+        fruitSound = GetComponentInChildren<AudioSource>();
+        fruitParticles = GetComponentInChildren<ParticleSystem>();
+        playerMovement = GameObject.Find("SnakeHead").GetComponentInChildren<PlayerMovement>();
+        timeAndPoints = GameObject.Find("UI").GetComponent<TimeAndPoints>();
+        manager = GameObject.Find("SnakeManager").GetComponent<SnakeManager>();
+        pointUpdater = GameObject.Find("UI").GetComponent<TimeAndPoints>();
+        pointUpdater.AmountOfPointsHad();
+        Debug.Log(fruitParticles);
+    }
 }

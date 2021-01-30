@@ -8,8 +8,6 @@ public class FruitPool : MonoBehaviour
     [SerializeField] GameObject fruitApple;
     [SerializeField] GameObject fruitGrenade;
 
-    [SerializeField] private bool canGrow = true;
-
     [SerializeField] private int poolDepth;
 
     private readonly List<GameObject> pool = new List<GameObject>();
