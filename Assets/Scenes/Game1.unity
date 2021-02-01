@@ -627,6 +627,7 @@ GameObject:
   m_Component:
   - component: {fileID: 380413091}
   - component: {fileID: 380413090}
+  - component: {fileID: 380413092}
   m_Layer: 0
   m_Name: FruitManager
   m_TagString: Untagged
@@ -647,10 +648,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeForFruitSpawn: 3
-  Fruits:
-  - {fileID: 972184321320526869, guid: 38dca4789709d4b45871c14baba49b69, type: 3}
-  - {fileID: 2033317935714652244, guid: 1d1d45d2c0c8fb447868a10470c91389, type: 3}
-  - {fileID: 4535471774529688471, guid: 6bb0b4e4f971e9846b41d89529ac1579, type: 3}
 --- !u!4 &380413091
 Transform:
   m_ObjectHideFlags: 0
@@ -665,6 +662,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &380413092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380413089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0160e9caa8e8c74486aed74ae885ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fruitBanana: {fileID: 4535471774529688471, guid: 6bb0b4e4f971e9846b41d89529ac1579,
+    type: 3}
+  fruitApple: {fileID: 972184321320526869, guid: 38dca4789709d4b45871c14baba49b69,
+    type: 3}
+  fruitGrenade: {fileID: 2033317935714652244, guid: 1d1d45d2c0c8fb447868a10470c91389,
+    type: 3}
+  poolDepth: 2
 --- !u!1 &458403654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,7 +1139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf732f7312d429a4ca84e6e738d2550e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snakeBodies: []
   snakeHead: {fileID: 5855926571468433504, guid: bf0011a72a0a1d545b400118ddb02e90,
     type: 3}
   snakeBody: {fileID: 1210596394704740215, guid: a90aa82834504be44b1167dab3e1125d,
